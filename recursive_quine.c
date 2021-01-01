@@ -24,15 +24,13 @@ void recursive_quine(FILE* f, long int offset) {
 		exit(EXIT_FAILURE);
 	}
 	
-	// read characters until the newline
+	// read characters until the newline or EOF
 	int c;
-	while((c = fgetc(f)) != EOF) {
+	while( ((c = fgetc(f)) != '\n') && (c != EOF) ) {
 		putchar(c);
-		if(c == '\n') {
-			break;
-		}
 	}
 	if(c == '\n') {
+		putchar(c);
 		// get current file offset indicating number of bytes into the file	
 		offset = ftell(f);
 		if(offset == -1L) {
